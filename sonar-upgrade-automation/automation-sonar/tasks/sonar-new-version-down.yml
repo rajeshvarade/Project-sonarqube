@@ -1,0 +1,19 @@
+---
+
+    - name: Check if SonarQube {{ sq_version }} zip already exists
+      stat:
+        path: "{{ local_file }}"
+      register: sq_file
+
+    - name: Show message that SonarQube version already exists
+      debug:
+        msg: "SonarQube version {{ sq_version }} already exists. Skipping download."
+      when: sq_file.stat.exists
+
+    - name: Download SonarQube {{ sq_version }}
+      get_url:
+        url: "{{ download_url }}"
+        dest: "{{ local_file }}"
+        mode: '0755'
+        timeout: 600
+      when: not sq_file.stat.exists

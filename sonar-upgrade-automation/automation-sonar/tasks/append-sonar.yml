@@ -1,0 +1,18 @@
+---
+
+- name: Read JDBC settings from old sonar.properties
+  slurp:
+    src: /opt/sonarqube/conf/sonar.properties
+  register: old_sonar_properties
+
+- name: Extract JDBC lines
+  set_fact:
+    jdbc_lines: "{{ old_sonar_properties.content | b64decode | regex_findall('^sonar\\.jdbc\\..*$', multiline=True) }}"
+
+- name: Ensure JDBC lines exist in new sonar.properties (no duplicates)
+  lineinfile:
+    path: /opt/sonarqube/sonarqube-10.6.0.92116/conf/sonar.properties
+    line: "{{ item }}"
+    state: present
+    create: yes
+  loop: "{{ jdbc_lines }}"

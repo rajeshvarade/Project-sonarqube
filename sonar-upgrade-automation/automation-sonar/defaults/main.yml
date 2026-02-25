@@ -1,0 +1,8 @@
+---
+# defaults file for automation-sonar
+old_version: "10.5.1"   
+sq_version: "10.6.0.92116"
+download_url: "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-{{ sq_version }}.zip"
+local_file: "/tmp/sonarqube-{{ sq_version }}.zip"
+new_version: "10.6.0.92116"
+

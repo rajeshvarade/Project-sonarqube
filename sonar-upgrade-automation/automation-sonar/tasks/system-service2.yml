@@ -1,0 +1,11 @@
+---
+
+    - name: Replace old SonarQube version with new version
+      replace:
+        path: /etc/systemd/system/sonarqube.service
+        regexp: 'sonarqube-{{ old_version }}'
+        replace: 'sonarqube-{{ new_version }}'
+        backup: yes
+
+    - name: Reload systemd daemon to apply changes
+      command: systemctl daemon-reload
