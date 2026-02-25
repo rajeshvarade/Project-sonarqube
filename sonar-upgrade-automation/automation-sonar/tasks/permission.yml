@@ -1,0 +1,14 @@
+---
+
+    - name: Set ownership of SonarQube directory
+      file:
+        path: /opt/sonarqube/sonarqube-10.6.0.92116
+        owner: sonar
+        group: sonar
+        recurse: yes
+
+    - name: Set permissions of SonarQube directory
+      file:
+        path: /opt/sonarqube/sonarqube-10.6.0.92116
+        mode: '0755'
+        recurse: yes

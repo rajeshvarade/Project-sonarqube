@@ -1,0 +1,7 @@
+---
+- name: Run automation sonar role
+  hosts: localhost
+  become: yes
+
+  roles:
+    - automation-sonar
